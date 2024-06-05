@@ -7,5 +7,5 @@ from django.utils.translation import gettext
 
 class CustomLoginRequired(LoginRequiredMixin):
     def handle_no_permission(self):
-        messages.error(self.request, gettext('Вы не авторизованы! Пожалуйста, выполните вход.'))
+        messages.error(self.request, gettext('You are not logged in! Please log in.'))
         return redirect(reverse('login'))

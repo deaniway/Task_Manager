@@ -1,10 +1,12 @@
+import os
 from pathlib import Path
 from dotenv import load_dotenv
-
+import os
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -98,7 +100,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'ru'
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('ru', 'Russian'),
+]
+LOCALE_PATHS = [
+    os.path.join(PROJECT_DIR, 'locale'),
+]
 
 TIME_ZONE = 'UTC'
 

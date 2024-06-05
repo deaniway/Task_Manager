@@ -21,7 +21,7 @@ class LoginRequiredAndUserSelfCheckMixin(CustomLoginRequired, UserPassesTestMixi
         else:
             messages.error(
                 self.request,
-                _('У вас нет прав для изменения другого пользователя..'))
+                _('You do not have permission to modify another user.'))
             return redirect('user_list')
 
 
@@ -38,7 +38,7 @@ class UserCreateView(CreateView):
     form_class = UserForm
     template_name = 'users/create.html'
     success_url = reverse_lazy('login')  # Перенаправление
-    success_message = _("Пользователь успешно создан")
+    success_message = _("The user has been successfully registered")
 
 
 # Редактирование
@@ -47,7 +47,7 @@ class UserUpdateView(LoginRequiredAndUserSelfCheckMixin, UpdateView):
     form_class = UserForm
     template_name = 'users/update.html'
     success_url = reverse_lazy('user_list')  # Перенаправление
-    success_message = _("Пользователь успешно обновлен")
+    success_message = _("User successfully updated")
 
 
 # Удаление
@@ -55,4 +55,4 @@ class UserDeleteView(LoginRequiredAndUserSelfCheckMixin, DeleteView):
     model = User
     template_name = 'users/delete.html'
     success_url = reverse_lazy('user_list')  # Перенаправление
-    success_message = _("Пользователь успешно удален")
+    success_message = _("User successfully deleted")
