@@ -37,8 +37,8 @@ class UserCreateView(CreateView):
     model = User()
     form_class = UserForm
     template_name = 'users/create.html'
-    success_url = reverse_lazy('login')  # Перенаправление
-    success_message = _("The user has been successfully registered")
+    success_url = reverse_lazy('login')  # отложенное определение URL-адреса до момента его фактического использования.
+    success_message = _("The user has been successfully registered")  # Флешка и перевод строки через '_'
 
 
 # Редактирование
@@ -47,7 +47,7 @@ class UserUpdateView(LoginRequiredAndUserSelfCheckMixin, UpdateView):
     form_class = UserForm
     template_name = 'users/update.html'
     success_url = reverse_lazy('user_list')  # Перенаправление
-    success_message = _("User successfully updated")
+    success_message = _("User successfully updated")  # Флешка и перевод строки через '_'
 
 
 # Удаление

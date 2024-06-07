@@ -1,0 +1,62 @@
+{% load i18n %}
+
+<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark shadow-right" style="width: 280px; min-height: 100vh;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-4"><h4>{% translate 'Task manager' %}</h4></span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+
+        <li class="nav-item">
+            <a href="{% url 'user_list' %}" class="nav-link text-white">
+                <span>👥</span> <h5 class="d-inline">{% translate 'Users' %}</h5>
+            </a>
+        </li>
+
+        <hr>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a href="{% url 'statuses_list' %}" class="nav-link text-white">
+                <span>🖇</span> <h5 class="d-inline">{% translate 'Statuses' %}</h5>
+            </a>
+        </li>
+        <hr>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a href="#" class="nav-link text-white">
+                <span>🎯</span> <h5 class="d-inline">{% translate 'Labels' %}</h5>
+            </a>
+        </li>
+        <hr>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link text-white">
+                <span>✏️</span> <h5 class="d-inline">{% translate 'Tasks' %}</h5>
+            </a>
+        </li>
+        <hr>
+        {% endif %}
+    </ul>
+    <hr>
+    <div class="navbar-nav">
+    {% if user.is_authenticated %}
+    <form class="d-flex" action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-primary me-2" type="submit" title="{% translate 'Logout' %}">
+            {% translate 'Logout' %}
+        </button>
+    </form>
+    {% else %}
+    <a class="btn btn-success me-2" href="{% url 'login' %}" title="{% translate 'Login' %}">
+        {% translate 'Login' %}
+    </a>
+        <br>
+    <a class="btn btn-primary me-2" href="{% url 'user_create' %}" title="{% translate 'Registration' %}">
+        {% translate 'Registration' %}
+    </a>
+    {% endif %}
+    </div>
+</div>

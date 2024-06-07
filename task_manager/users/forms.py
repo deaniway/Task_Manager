@@ -8,8 +8,8 @@ class UserForm(UserCreationForm):
         model = get_user_model()
         fields = ['first_name', 'last_name', 'username',]
 
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-        if self.instance.username == username:
-            return username
-        return username
+    #def clean_username(self):
+    #    username = self.cleaned_data.get('username')
+    #    if self.instance.username == username:
+    #        return username
+    #    return username
