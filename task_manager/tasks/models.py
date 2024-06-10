@@ -31,7 +31,7 @@ class Task(models.Model):
                                related_name='tasks'
                                )
 
-    created_at = models.DateTimeField(_('created'), default=timezone.now)  # ?default=timezone.now
+    created_at = models.DateTimeField(_('created'), default=timezone.now)  # ? auto_now_add=True
 
     def __str__(self):
         return self.name
