@@ -26,7 +26,7 @@
 
         {% if user.is_authenticated %}
         <li class="nav-item">
-            <a href="#" class="nav-link text-white">
+            <a href="{% url 'labels_list' %}" class="nav-link text-white">
                 <span>🎯</span> <h5 class="d-inline">{% translate 'Labels' %}</h5>
             </a>
         </li>

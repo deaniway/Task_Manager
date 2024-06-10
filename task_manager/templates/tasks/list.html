@@ -6,7 +6,9 @@
 {% block content %}
 <a class="btn btn-primary" href="{% url 'task_create' %}">{% translate 'Create task' %}</a>
 
-
+<br>
+<br>
+{% include './filter.html' %}
 
 <table class="table">
     <thead>
