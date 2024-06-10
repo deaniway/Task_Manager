@@ -22,6 +22,7 @@ class StatusCreateView(CustomLoginRequired, SuccessMessageMixin, CreateView):
 
 class StatusUpdateView(CustomLoginRequired, SuccessMessageMixin, UpdateView):
     model = Status
+    fields = ['name']
     template_name = 'statuses/create.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _("The status has been successfully updated")

@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="text-start ms-0">
-    <p>{% translate "Are you sure you want to delete" %} {% block object_name %}{% endblock %}?</p>
+    <p>{% translate "Are you sure you want to delete:" %} <h5>{% block object_name %}</h5>{% endblock %}?</p>
     <form method="post">
         {% csrf_token %}
         <input class="btn btn-danger" type="submit" value="{% translate 'Yes, delete' %}">
