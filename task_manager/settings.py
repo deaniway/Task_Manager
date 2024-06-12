@@ -24,7 +24,6 @@ if RENDER_EXTERNAL_HOSTNAME:
 ROLLBAR = {
     'access_token': os.getenv('ROLLBAR_TOKEN'),
     'environment': 'development' if DEBUG else 'production',
-    'code_version': '1.0',
     'root': BASE_DIR,
 }
 

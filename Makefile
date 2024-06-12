@@ -15,3 +15,8 @@ lint:
 test:
 	poetry run ./manage.py test
 
+makemigrations:
+	poetry run ./manage.py makemigrations
+
+migrate:
+	poetry run ./manage.py migrate
