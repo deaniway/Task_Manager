@@ -1,5 +1,4 @@
 from task_manager.tasks.models import Task
-from task_manager.labels.models import Label
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django_filters.views import FilterView
 from task_manager.tasks.filters import TaskFilter
@@ -38,7 +37,7 @@ class TaskCreateView(CustomLoginRequired, CreateView, SuccessMessageMixin):
 
 class TaskUpdateView(CustomLoginRequired, SuccessMessageMixin, UpdateView):
     model = Task
-    fields = ['name', 'description', 'status', 'labels',  'executor']
+    fields = ['name', 'description', 'status', 'labels', 'executor']
     template_name = 'tasks/update.html'
     success_url = reverse_lazy('tasks_list')
     success_message = _("The task has been successfully updated")

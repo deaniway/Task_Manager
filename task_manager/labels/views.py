@@ -30,17 +30,16 @@ class LabelUpdateView(CustomLoginRequired, SuccessMessageMixin, UpdateView):
     success_message = _("The label has been successfully updated")
 
 
-class LabelDeleteView(CustomLoginRequired,SuccessMessageMixin, DeleteView):
+class LabelDeleteView(CustomLoginRequired, SuccessMessageMixin, DeleteView):
     model = Label
     template_name = 'labels/delete.html'
     success_url = reverse_lazy('labels_list')
-    success_message = _("The label has been successfully deleted")
+    success_message = _('The label has been successfully deleted')
 
-
-def post(self, request, *args, **kwargs):
-    if self.get_object().tasks.exists():
-        messages.error(
-            self.request,
-            _('Unable to delete a label because it is being used'))
-        return redirect('labels_list')
-    return super().post(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        if self.get_object().tasks.exists():
+            messages.error(
+                self.request,
+                _('Unable to delete a label because it is being used'))
+            return redirect('labels_list')
+        return super().post(request, *args, **kwargs)

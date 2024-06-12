@@ -10,7 +10,7 @@ class TaskFilter(FilterSet):
 
     label = ModelChoiceFilter(
         queryset=Label.objects.all(),  # cвсе метки
-        field_name='labels', # для фильтрации по метке
+        field_name='labels',  # для фильтрации по метке
         label=_('Label'),
     )
 
