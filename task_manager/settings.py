@@ -86,7 +86,7 @@ DATABASES = {
     )
 }
 
-if os.getenv('DB_ENGINE') == 'SQLite':
+if os.getenv('DB_ENGINE') == 'SQLite':      # сомнительно, думаю грамотно будет сразу psql
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
