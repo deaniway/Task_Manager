@@ -353,3 +353,7 @@ msgstr "Статус успешно изменен"
 
 msgid "The label has been successfully updated"
 msgstr "Метка успешно изменена"
+
+
+msgid "The task has been successfully updated"
+msgstr "Задача успешно изменена"
