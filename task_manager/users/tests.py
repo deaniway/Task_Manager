@@ -48,7 +48,10 @@ class TestUserCreateView(BaseTestCase):
 
         # Проверяем, что сообщение об успешной регистрации добавлено в контекст
         messages = list(get_messages(response.wsgi_request))
-        self.assertTrue(any(_("The user has been successfully registered") in str(message) for message in messages))
+        self.assertTrue(any(
+            _("The user has been successfully registered") in str(message)
+            for message in messages
+        ))
 
 
 class TestUserUpdateView(BaseTestCase):
@@ -77,13 +80,15 @@ class TestUserDeleteView(BaseTestCase):
         self.assertRedirects(response, reverse('user_list'), status_code=302)
 
         messages = list(get_messages(response.wsgi_request))
-        self.assertTrue(any(_("User successfully deleted") in str(message) for message in messages))
+        self.assertTrue(any(_("User successfully deleted") in str(message)
+                            for message in messages
+                            ))
         self.assertFalse(User.objects.filter(pk=self.logged_user.pk).exists())
 
 
 class TestPermissionDenied(BaseTestCase):
     def setUp(self):
-        self.other_user = User.objects.create_user(username='nikola_tesla', password='testpassword123')
+        self.other_user = User.objects.create_user(username='test1', password='testpass123')
         self.update_url = reverse('user_update', args=[self.other_user.pk])
         self.delete_url = reverse('user_delete', args=[self.other_user.pk])
         self.login()
@@ -94,7 +99,9 @@ class TestPermissionDenied(BaseTestCase):
 
         messages = list(get_messages(response.wsgi_request))
         self.assertTrue(
-            any(_("You do not have permission to modify another user.") in str(message) for message in messages))
+            any(_("You do not have permission to modify another user.") in str(message)
+                for message in messages
+                ))
 
     def test_permission_denied_delete(self):
         response = self.client.get(self.delete_url)
@@ -102,4 +109,6 @@ class TestPermissionDenied(BaseTestCase):
 
         messages = list(get_messages(response.wsgi_request))
         self.assertTrue(
-            any(_("You do not have permission to modify another user.") in str(message) for message in messages))
+            any(_("You do not have permission to modify another user.") in str(message)
+                for message in messages
+                ))

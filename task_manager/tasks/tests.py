@@ -10,9 +10,13 @@ from task_manager.tasks.models import Task
 class BaseTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.user = get_user_model().objects.create_user(username='testuser', password='testpassword')
+        cls.user = get_user_model().objects.create_user(username='testuser',
+                                                        password='testpassword'
+                                                        )
         cls.test_status = Status.objects.create(name='Test status')
-        cls.other_user = get_user_model().objects.create(username='otheruser', password='otherpassword')
+        cls.other_user = get_user_model().objects.create(username='otheruser',
+                                                         password='otherpassword'
+                                                         )
         cls.test_task = Task.objects.create(
             name='Test task',
             description='Test description',

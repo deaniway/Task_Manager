@@ -21,7 +21,7 @@ class TaskFilter(FilterSet):
         label=_('Only your own tasks'),
     )
 
-    def filter_tasks(self, queryset, name, value):  # Фильтрация по задачам, созданным текущим пользователем
+    def filter_tasks(self, queryset, name, value):
         if value:
             return queryset.filter(creator=self.request.user)
         return queryset

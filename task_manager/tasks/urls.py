@@ -1,6 +1,7 @@
 from django.urls import path
 
-from task_manager.tasks.views import TaskFilterView, TaskCreateView, TaskUpdateView, TaskDeleteView, TaskDetailView
+from task_manager.tasks.views import TaskFilterView, TaskCreateView, \
+    TaskUpdateView, TaskDeleteView, TaskDetailView
 
 urlpatterns = [
     path('', TaskFilterView.as_view(), name='tasks_list'),

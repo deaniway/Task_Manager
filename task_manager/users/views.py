@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy  # Для отложенного вычисления URL-адресов
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView  # Классовые представления
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -38,8 +38,8 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     model = User()
     form_class = UserForm
     template_name = 'users/create.html'
-    success_url = reverse_lazy('login')  # отложенное определение URL-адреса до момента его фактического использования.
-    success_message = _("The user has been successfully registered")  # The user has been successfully registered
+    success_url = reverse_lazy('login')  # отложенное определение URL-адреса
+    success_message = _("The user has been successfully registered")
 
 
 # Редактирование
