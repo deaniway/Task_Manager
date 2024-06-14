@@ -43,7 +43,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 
 
 # Редактирование
-class UserUpdateView(LoginRequiredAndUserSelfCheckMixin, SuccessMessageMixin,  UpdateView):
+class UserUpdateView(LoginRequiredAndUserSelfCheckMixin, SuccessMessageMixin, UpdateView):
     model = User
     form_class = UserForm
     template_name = 'users/update.html'
