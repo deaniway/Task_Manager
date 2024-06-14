@@ -22,7 +22,7 @@ class TaskDetailView(CustomLoginRequired, DetailView):
     template_name = 'tasks/detail.html'
 
 
-class TaskCreateView(CustomLoginRequired,SuccessMessageMixin, CreateView):
+class TaskCreateView(CustomLoginRequired, SuccessMessageMixin, CreateView):
     model = Task
     fields = ['name', 'description', 'status', 'labels', 'executor']
     template_name = 'tasks/create.html'
