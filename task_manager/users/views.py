@@ -34,7 +34,7 @@ class UserListView(ListView):
 
 
 # Создание
-class UserCreateView(CreateView, SuccessMessageMixin):
+class UserCreateView(SuccessMessageMixin, CreateView):
     model = User()
     form_class = UserForm
     template_name = 'users/create.html'
@@ -43,7 +43,7 @@ class UserCreateView(CreateView, SuccessMessageMixin):
 
 
 # Редактирование
-class UserUpdateView(LoginRequiredAndUserSelfCheckMixin, UpdateView, SuccessMessageMixin):
+class UserUpdateView(LoginRequiredAndUserSelfCheckMixin, SuccessMessageMixin,  UpdateView):
     model = User
     form_class = UserForm
     template_name = 'users/update.html'
@@ -52,7 +52,7 @@ class UserUpdateView(LoginRequiredAndUserSelfCheckMixin, UpdateView, SuccessMess
 
 
 # Удаление
-class UserDeleteView(LoginRequiredAndUserSelfCheckMixin, DeleteView, SuccessMessageMixin):
+class UserDeleteView(LoginRequiredAndUserSelfCheckMixin, SuccessMessageMixin, DeleteView):
     model = User
     template_name = 'users/delete.html'
     success_url = reverse_lazy('user_list')  # Перенаправление
