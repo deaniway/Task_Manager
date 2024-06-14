@@ -48,7 +48,7 @@ class TestUserCreateView(BaseTestCase):
 
         # Проверяем, что сообщение об успешной регистрации добавлено в контекст
         messages = list(get_messages(response.wsgi_request))
-        self.assertFalse(any(_("The user has been successfully registered") in str(message) for message in messages))
+        self.assertTrue(any(_("The user has been successfully registered") in str(message) for message in messages))
 
 
 class TestUserUpdateView(BaseTestCase):
@@ -77,7 +77,7 @@ class TestUserDeleteView(BaseTestCase):
         self.assertRedirects(response, reverse('user_list'), status_code=302)
 
         messages = list(get_messages(response.wsgi_request))
-        self.assertFalse(any(_("User successfully deleted") in str(message) for message in messages))
+        self.assertTrue(any(_("User successfully deleted") in str(message) for message in messages))
         self.assertFalse(User.objects.filter(pk=self.logged_user.pk).exists())
 
 
