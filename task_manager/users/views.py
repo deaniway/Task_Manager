@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext as _
 from task_manager.mixins import CustomLoginRequired
 from task_manager.users.forms import UserForm
+from django.contrib.messages.views import SuccessMessageMixin
 
 User = get_user_model()  # Получаем юзера
 
@@ -33,7 +34,7 @@ class UserListView(ListView):
 
 
 # Создание
-class UserCreateView(CreateView):
+class UserCreateView(CreateView, SuccessMessageMixin):
     model = User()
     form_class = UserForm
     template_name = 'users/create.html'
@@ -42,22 +43,16 @@ class UserCreateView(CreateView):
 
 
 # Редактирование
-class UserUpdateView(LoginRequiredAndUserSelfCheckMixin, UpdateView):
+class UserUpdateView(LoginRequiredAndUserSelfCheckMixin, UpdateView, SuccessMessageMixin):
     model = User
     form_class = UserForm
     template_name = 'users/update.html'
     success_url = reverse_lazy('user_list')  # Перенаправление
     success_message = _("User successfully updated")  # Флешка и перевод строки через '_'
 
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        print("Form is valid!")
-        print("Response status code:", response.status_code)
-        return response
-
 
 # Удаление
-class UserDeleteView(LoginRequiredAndUserSelfCheckMixin, DeleteView):
+class UserDeleteView(LoginRequiredAndUserSelfCheckMixin, DeleteView, SuccessMessageMixin):
     model = User
     template_name = 'users/delete.html'
     success_url = reverse_lazy('user_list')  # Перенаправление
