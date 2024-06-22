@@ -17,8 +17,6 @@ class LoggedUserAndTestDataTaskMixin(TestCase):
 
 
 """
-# Не хочет работать и все,  все тесты валятся 
-
 class TaskTestCase(UserTestCase):
     @classmethod
     def setUpTestData(cls):
