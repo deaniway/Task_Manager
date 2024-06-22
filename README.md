@@ -79,13 +79,7 @@ DATABASE_URL=postgresql://pguser:pgpass@localhost:5434/pgdb
 #### Up postgres DB (Docker for example):
 
 ```sh
-docker run -d \
-    --name tassk_manage \
-    -e POSTGRES_USER=pguser \
-    -e POSTGRES_PASSWORD=pgpass \
-    -e POSTGRES_DB=pgdb \
-    -p 5434:5432 \
-    postgres:latest
+make dev-db
 ```
 
 #### Run local server:

@@ -24,3 +24,6 @@ makemigrations:
 
 migrate:
 	poetry run ./manage.py migrate
+
+dev-db:
+	docker-compose up -d
