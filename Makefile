@@ -10,7 +10,7 @@ start:
 	poetry run gunicorn -w 5 -b 0.0.0.0:$(PORT) task_manager.wsgi:application
 
 lint:
-	poetry run flake8 task_manager
+	poetry run flake8 _project_
 
 test:
 	poetry run ./manage.py test
