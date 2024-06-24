@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_bootstrap5',
-    '_project_',
+    'task_manager',
     'core',
     'apps.labels',
     'apps.statuses',
@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 ]
 
-ROOT_URLCONF = '_project_.urls'
+ROOT_URLCONF = 'task_manager.urls'
 
 TEMPLATES = [
     {
@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = '_project_.wsgi.application'
+WSGI_APPLICATION = 'task_manager.wsgi.application'
 
 
 DATABASES = {

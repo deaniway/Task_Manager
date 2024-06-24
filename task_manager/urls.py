@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from _project_.views import IndexTemplateView, UserLoginView, UserLogoutView
+from task_manager.views import IndexTemplateView, UserLoginView, UserLogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
