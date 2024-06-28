@@ -1,41 +1,22 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import UserPassesTestMixin
-from django.contrib import messages
-from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext as _
-from core.mixins import CustomLoginRequired
+from core.mixins import  LoginRequiredAndUserSelfCheckMixin
 from apps.users.forms import UserForm
 from django.contrib.messages.views import SuccessMessageMixin
-
-User = get_user_model()  # Получаем юзера
-
-
-class LoginRequiredAndUserSelfCheckMixin(CustomLoginRequired, UserPassesTestMixin):
-    def test_func(self):
-        return self.request.user == self.get_object()
-
-    def handle_no_permission(self):
-        if not self.request.user.is_authenticated:
-            return super().handle_no_permission()
-        else:
-            messages.error(
-                self.request,
-                _('You do not have permission to modify another user.'))
-            return redirect('user_list')
 
 
 # Отображение
 class UserListView(ListView):
-    model = User
+    model = get_user_model()
     template_name = 'users/list.html'
     context_object_name = 'users'
 
 
 # Создание
 class UserCreateView(SuccessMessageMixin, CreateView):
-    model = User()
+    model = get_user_model()
     form_class = UserForm
     template_name = 'users/create.html'
     success_url = reverse_lazy('login')  # отложенное определение URL-адреса
@@ -44,7 +25,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 
 # Редактирование
 class UserUpdateView(LoginRequiredAndUserSelfCheckMixin, SuccessMessageMixin, UpdateView):
-    model = User
+    model = get_user_model()
     form_class = UserForm
     template_name = 'users/update.html'
     success_url = reverse_lazy('user_list')  # Перенаправление
@@ -53,7 +34,7 @@ class UserUpdateView(LoginRequiredAndUserSelfCheckMixin, SuccessMessageMixin, Up
 
 # Удаление
 class UserDeleteView(LoginRequiredAndUserSelfCheckMixin, SuccessMessageMixin, DeleteView):
-    model = User
+    model = get_user_model()
     template_name = 'users/delete.html'
     success_url = reverse_lazy('user_list')  # Перенаправление
     success_message = _("User successfully deleted")

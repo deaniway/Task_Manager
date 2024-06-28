@@ -4,12 +4,10 @@ from django.urls import reverse_lazy
 import dj_database_url
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
@@ -37,7 +35,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_bootstrap5',
-    'task_manager',
     'core',
     'apps.labels',
     'apps.statuses',
@@ -77,7 +74,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'task_manager.wsgi.application'
 
-
 DATABASES = {
     'default': dj_database_url.config(
         default=os.getenv(
@@ -87,12 +83,11 @@ DATABASES = {
     )
 }
 
-if os.getenv('DB_ENGINE') == 'SQLite':      # сомнительно, думаю грамотно будет сразу psql
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-
+# if os.getenv('DB_ENGINE') == 'SQLite':  # сомнительно, думаю грамотно будет сразу psql
+#    DATABASES['default'] = {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -108,7 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 LANGUAGE_CODE = 'Ru-ru'
 
@@ -126,7 +120,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 STATIC_URL = 'static/'
 

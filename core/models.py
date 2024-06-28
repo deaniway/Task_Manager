@@ -13,6 +13,13 @@ class BaseModel(models.Model):
         verbose_name=_('updated'),
     )
 
+    class Meta:
+        abstract = True
+
+
+class BaseModelName(models.Model):
+    name = models.CharField(_('Name'), max_length=255, unique=True)
+
     def __str__(self):
         return self.name
 

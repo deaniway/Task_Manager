@@ -1,14 +1,12 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
-from django.utils import timezone
 from apps.statuses.models import Status
 from apps.labels.models import Label
-from core.models import BaseModel
+from core.models import BaseModel, BaseModelName
 
 
-class Task(BaseModel):
-    name = models.CharField(_('name'), max_length=256, unique=True)
+class Task(BaseModel, BaseModelName):
 
     description = models.TextField(_('description'), blank=True)
 
@@ -38,8 +36,8 @@ class Task(BaseModel):
                                     blank=True,
                                     )
 
-    created_at = models.DateTimeField(_('created'), default=timezone.now)
 
     class Meta:
         verbose_name = _('Task')
         verbose_name_plural = _('Tasks')
+

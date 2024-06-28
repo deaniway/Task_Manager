@@ -1,15 +1,12 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from core.models import BaseModel
+from core.models import BaseModel, BaseModelName
 
 
-class Status(BaseModel):
-    name = models.CharField(
-        max_length=255,
-        verbose_name=_('name'),
-    )
+class Status(BaseModel, BaseModelName):
 
     class Meta:
         verbose_name = _('Status')
         verbose_name_plural = _('Statuses')
+        ordering = ['-created']
