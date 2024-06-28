@@ -2,7 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext as _
-from core.mixins import  LoginRequiredAndUserSelfCheckMixin
+from core.mixins import LoginRequiredAndUserSelfCheckMixin
 from apps.users.forms import UserForm
 from django.contrib.messages.views import SuccessMessageMixin
 

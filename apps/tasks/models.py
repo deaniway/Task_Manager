@@ -7,7 +7,6 @@ from core.models import BaseModel, BaseModelName
 
 
 class Task(BaseModel, BaseModelName):
-
     description = models.TextField(_('description'), blank=True)
 
     creator = models.ForeignKey(get_user_model(),
@@ -36,8 +35,6 @@ class Task(BaseModel, BaseModelName):
                                     blank=True,
                                     )
 
-
     class Meta:
         verbose_name = _('Task')
         verbose_name_plural = _('Tasks')
-
