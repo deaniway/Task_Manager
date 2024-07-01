@@ -1,66 +1,50 @@
-
 name: PyCI
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
+  - push
+  - pull_request
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.11]
+        python-version: [ 3.11 ]
+
     services:
       postgres:
-        image: postgres:latest
+        image: postgres
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
         ports:
           - 5432:5432
-        env:
-          POSTGRES_USER: pguser
-          POSTGRES_PASSWORD: pgpass
-          POSTGRES_DB: pgdb
-        options: >-
-          --health-cmd="pg_isready -U pguser"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
+
     steps:
       - uses: actions/checkout@v3
-
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-
       - name: Install dependencies
         run: |
           pip install poetry
           make install
-
       - name: Run linter
         run: |
           make lint
-
-      - name: Wait for PostgreSQL to be ready
-        run: |
-          until pg_isready -h localhost -p 5432 -U pguser; do
-            echo "Waiting for PostgreSQL to be ready..."
-            sleep 5
-          done
-
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.2.0
         if: github.ref_name == 'main'
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          DB_ENGINE: postgresql
-          DB_NAME: pgdb
-          DB_USER: pguser
-          DB_PASSWORD: pgpass
-          DB_HOST: localhost
+          DATABASE_URL: 'postgres://postgres:postgres@localhost:5432/postgres'
           SECRET_KEY: not_so_secret
         with:
           coverageCommand: make test-coverage
