@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext as _
 from core.mixins import LoginRequiredAndUserSelfCheckMixin
 from apps.users.forms import UserForm
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 # Отображение
@@ -14,7 +15,7 @@ class UserListView(ListView):
 
 
 # Создание
-class UserCreateView(CreateView):
+class UserCreateView(SuccessMessageMixin, CreateView):
     model = get_user_model()
     form_class = UserForm
     template_name = 'users/create.html'
@@ -23,7 +24,7 @@ class UserCreateView(CreateView):
 
 
 # Редактирование
-class UserUpdateView(LoginRequiredAndUserSelfCheckMixin, UpdateView):
+class UserUpdateView(LoginRequiredAndUserSelfCheckMixin, SuccessMessageMixin, UpdateView):
     model = get_user_model()
     form_class = UserForm
     template_name = 'users/update.html'
@@ -32,7 +33,7 @@ class UserUpdateView(LoginRequiredAndUserSelfCheckMixin, UpdateView):
 
 
 # Удаление
-class UserDeleteView(LoginRequiredAndUserSelfCheckMixin, DeleteView):
+class UserDeleteView(LoginRequiredAndUserSelfCheckMixin, SuccessMessageMixin, DeleteView):
     model = get_user_model()
     template_name = 'users/delete.html'
     success_url = reverse_lazy('user_list')  # Перенаправление
