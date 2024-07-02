@@ -1,12 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import gettext
 from django.utils.translation import gettext as _
 
 
-class CustomLoginRequired(LoginRequiredMixin):
+class CustomLoginRequired(LoginRequiredMixin,SuccessMessageMixin):
     def handle_no_permission(self):
         messages.error(self.request, gettext('You are not logged in! Please log in.'))
         return redirect(reverse('login'))
